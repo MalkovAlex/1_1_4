@@ -12,15 +12,15 @@ public class Util {
     private static final String DB_PASSWORD = "rootroot";
 
     public static Connection getConnection () {
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)){
+        Connection connection = null;
+        try {
             Class.forName(DB_DRIVER);
+            connection = DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
             System.out.println("Connection OK");
-            return connection;
         } catch (SQLException | ClassNotFoundException e) {
             System.err.println("Connection ERROR");
-            return null;
         }
+        return connection;
     }
 
 
